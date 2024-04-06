@@ -1,0 +1,256 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --blue: #289df7;
+  --sidebar-background: #11101d;
+  --search-background: rgba(255, 255, 255, 0.2);
+  --menu-hover: #1e1d2f;
+}
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  padding: 10px;
+}
+
+/* HIDDEN */
+
+.hidden {
+  opacity: 1;
+  visibility: visible;
+  white-space: nowrap;
+  transition: 230ms opacity, 230ms visibility;
+}
+.sidebar:has(input[name="minimalize"]:checked) .hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* SIDE BAR */
+
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background: var(--sidebar-background);
+  border-radius: 14px;
+  padding: 0 14px 14px;
+  position: relative;
+  transition: 0.3s all;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar:has(input[name="minimalize"]:checked) {
+  width: 68px;
+}
+.sidebar input[name="minimalize"] {
+  display: none;
+}
+
+/* TOGGLE */
+
+.sidebar .toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue);
+  color: white;
+  position: absolute;
+  top: 16px;
+  left: 100%;
+  transform: translate(-50%);
+  cursor: pointer;
+}
+.sidebar .toggle svg {
+  transform: rotate(180deg);
+  transition: 600ms all;
+  width: 18px;
+  height: 18px;
+}
+.sidebar:has(input[name="minimalize"]:checked) .toggle {
+  width: 26px;
+  height: 26px;
+}
+.sidebar:has(input[name="minimalize"]:checked) .toggle svg {
+  width: 14px;
+  height: 14px;
+  transform: rotate(0deg);
+}
+
+/* HEADER */
+
+.sidebar .header {
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 10px;
+}
+.sidebar .header img {
+  width: 40px;
+  height: 40px;
+}
+
+/* SEARCH */
+
+.sidebar .search {
+  position: relative;
+}
+.sidebar .search label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  display: none;
+}
+.sidebar .search .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .search .icon svg {
+  width: 22px;
+  height: 22px;
+  color: white;
+}
+.sidebar .search input {
+  width: 100%;
+  height: 40px;
+  background-color: var(--search-background);
+  border-radius: 4px;
+  outline: none;
+  padding: 0 12px 0 40px;
+  font-size: 14px;
+  color: white;
+}
+.sidebar:has(input[name="minimalize"]:checked) .search input {
+  padding-right: 0;
+}
+.sidebar:has(input[name="minimalize"]:checked) .search label {
+  display: block;
+}
+
+/* MENU */
+
+.sidebar .menu {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar .menu a {
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.sidebar .menu a:where(:hover, .active) {
+  background-color: var(--menu-hover);
+}
+.sidebar .menu a .icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.sidebar .menu a .icon::before {
+  content: attr(title);
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(20px, -50%);
+  background-color: #333;
+  padding: 3px 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: 230ms all;
+}
+.sidebar .menu a .icon::after {
+  content: "";
+  border: 4px solid transparent;
+  border-right-color: #111;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(12px, -50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: 230ms all;
+}
+.sidebar:has(input[name="minimalize"]:checked) .menu .icon:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar:has(input[name="minimalize"]:checked) .menu .icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar .menu a .icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* USER */
+
+.sidebar .user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+.sidebar .user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.sidebar .user .name {
+  font-size: 14px;
+  color: white;
+}
+.sidebar .user .email {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.sidebar .user button {
+  margin-left: auto;
+  margin-right: -14px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: rgb(238, 64, 64);
+}
+.sidebar .user button svg {
+  width: 20px;
+  height: 20px;
+}
